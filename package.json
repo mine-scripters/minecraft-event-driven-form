@@ -23,10 +23,10 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
-    "@mine-scripters/minecraft-event-driven-form-base": "^1.0.0"
+    "@mine-scripters/minecraft-event-driven-form-base": "^1.0.1"
   },
   "scripts": {
-    "build": "rollup -c && dts-bundle-generator -o dist/MinecraftEventDrivenForm.d.ts src/index.ts",
+    "build": "rollup -c && dts-bundle-generator --external-inlines '@mine-scripters/minecraft-event-driven-form-base' -o dist/MinecraftEventDrivenForm.d.ts src/index.ts",
     "docs": "typedoc",
     "test": "jest",
     "prettier": "npm run prettier:base -- --write",
