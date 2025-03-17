@@ -3,8 +3,7 @@
   "navigation": {
     "includeCategories": true
   },
-  "categoryOrder": [
-  ],
+  "categoryOrder": [],
   "githubPages": true,
   "excludeInternal": true,
   "excludePrivate": true,
