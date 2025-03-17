@@ -1,0 +1,58 @@
+{
+  "name": "@mine-scripters/minecraft-event-driven-form",
+  "version": "0.0.0",
+  "description": "Event driven minecraft forms",
+  "main": "./dist/MinecraftEventDrivenForm.js",
+  "types": "./dist/MinecraftEventDrivenForm.d.ts",
+  "private": false,
+  "devDependencies": {
+    "@mine-scripters/minecraft-script-dialogue": "^1.2.0",
+    "@minecraft/server": "^1.7.0",
+    "@minecraft/server-ui": "^1.3.0",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@typescript-eslint/eslint-plugin": "^8.26.1",
+    "@typescript-eslint/parser": "^8.26.1",
+    "dts-bundle-generator": "^9.5.1",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-jest": "^28.11.0",
+    "prettier": "^3.5.3",
+    "rollup": "^4.35.0",
+    "typedoc": "^0.28.0",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@mine-scripters/minecraft-event-driven-form-base": "^1.0.0"
+  },
+  "scripts": {
+    "build": "rollup -c && dts-bundle-generator -o dist/MinecraftEventDrivenForm.d.ts src/index.ts",
+    "docs": "typedoc",
+    "test": "jest",
+    "prettier": "npm run prettier:base -- --write",
+    "prettier:check": "npm run prettier:base -- --check",
+    "prettier:base": "prettier src/** *.json ./*js README.md",
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src"
+  },
+  "peerDependencies": {
+    "@mine-scripters/minecraft-script-dialogue": "^1.2.0",
+    "@minecraft/server": "^1.7.0 || ^1.8.0 || ^1.9.0 || ^1.10.0 || ^1.11.0 || ^1.12.0 || ^1.13.0 || ^1.14.0 || ^1.15.0 || ^1.16.0 || ^1.17.0 ",
+    "@minecraft/server-ui": "^1.3.0"
+  },
+  "files": [
+    "package.json",
+    "dist/**",
+    "README.md",
+    "LICENSE.txt"
+  ],
+  "keywords": [
+    "minecraft",
+    "minecraft-scripting"
+  ],
+  "author": "Josejulio Martínez",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  }
+}

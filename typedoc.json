@@ -1,0 +1,18 @@
+{
+  "entryPoints": ["src/index.ts"],
+  "navigation": {
+    "includeCategories": true
+  },
+  "categoryOrder": [
+  ],
+  "githubPages": true,
+  "excludeInternal": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "externalSymbolLinkMappings": {
+    "@minecraft/server": {
+      "Player": "https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/player?view=minecraft-bedrock-stable",
+      "RawMessage": "https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/rawmessage?view=minecraft-bedrock-stable"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+name: Build and test
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Check linter
+        run: npm run lint
+      - name: Check format
+        run: npm run prettier:check
+      # Disabling tests
+      #- name: Run tests
+      #  run: npm run test -- --coverage
+      - name: Build
+        run: npm run build
+      #- name: Upload coverage reports to Codecov
+      #  uses: codecov/codecov-action@v3
+      #  env:
+      #    CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          commit_message: Updates `./dist/*` files with latest changes
+          file_pattern: dist/*
