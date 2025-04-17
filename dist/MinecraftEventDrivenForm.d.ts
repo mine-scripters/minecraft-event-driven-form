@@ -158,7 +158,7 @@ export type EventReceiverFunction = (event: FormEvent) => Promise<void>;
 export type EventReceiverMap = Record<string, EventReceiverFunction>;
 export type EventReceiver = EventReceiverFunction | EventReceiverMap | undefined;
 export declare const triggerEvent: (event: FormEvent, receiver: EventReceiver) => Promise<Form | undefined>;
-export declare const _: (value: string) => Translate;
+export declare const _: (value: string, ...args: Array<TextContent>) => Translate;
 export declare const renderLoop: (player: Player, formHub: FormHub, receiver: EventReceiver) => Promise<void>;
 
 export {};

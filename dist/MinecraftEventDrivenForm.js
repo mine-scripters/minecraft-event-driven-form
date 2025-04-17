@@ -153,8 +153,9 @@ const triggerEvent = async (event, receiver) => {
     return event.form;
 };
 
-const _ = (value) => ({
+const _ = (value, ...args) => ({
     translate: value,
+    args: args.length > 0 ? args : undefined,
 });
 
 const assertNever = (arg) => {
