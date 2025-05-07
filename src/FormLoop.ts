@@ -3,7 +3,7 @@ import {
   EventReceiver,
   Form,
   FormArguments,
-  FormEvent,
+  FormEventProducer,
   FormHub,
   InputForm,
   MultiButtonForm,
@@ -183,27 +183,37 @@ const renderForm = async (player: Player, formHub: FormHub, form: Form, args: Fo
     if (form.type === 'multi-button') {
       const multiButtonForm = form as MultiButtonForm;
       const selected = parseInt(response.selected);
-      return new FormEvent(formHub, multiButtonForm.elements[selected].action, args);
+      return new FormEventProducer(formHub, multiButtonForm.elements[selected].action, args);
     } else if (form.type === 'dual-button') {
       const dualButtonForm = form as DualButtonForm;
       if (response.selected === 'top') {
-        return new FormEvent(formHub, dualButtonForm.topButton.action, args);
+        return new FormEventProducer(formHub, dualButtonForm.topButton.action, args);
       } else if (response.selected === 'bottom') {
-        return new FormEvent(formHub, dualButtonForm.bottomButton.action, args);
+        return new FormEventProducer(formHub, dualButtonForm.bottomButton.action, args);
       }
     }
   } else if (response instanceof InputScriptDialogueResponse) {
     const inputForm = form as InputForm;
-    const event = new FormEvent(formHub, inputForm.action, args);
-    event.args.setAll(response.values);
+    const event = new FormEventProducer(
+      formHub,
+      {
+        ...inputForm.action,
+        setArgs: {
+          ...inputForm.action?.setArgs,
+          ...response.values,
+        },
+      },
+      args
+    );
+
     return event;
   }
 
-  return new FormEvent(formHub);
+  return new FormEventProducer(formHub);
 };
 
 export const renderLoop = async (player: Player, formHub: FormHub, receiver: EventReceiver) => {
-  let currentForm: Form | undefined = formHub.forms[formHub.entrypoint];
+  let currentForm: Form | undefined = await triggerEvent(FormEventProducer.fromFormHub(formHub), receiver);
   let args = new FormArguments();
   while (currentForm !== undefined) {
     const event = await renderForm(player, formHub, currentForm, args);
