@@ -2,6 +2,29 @@
 
 import { Player } from '@minecraft/server';
 
+/**
+ * @inline
+ */
+export interface ToString {
+	toString(): string;
+}
+/**
+ * @inline
+ */
+export type StringResolvableMap = {
+	[key: string]: StringResolvable;
+};
+export type StringResolvable = ToString | StringResolvableMap;
+export declare class FormArguments {
+	private _args;
+	set(name: string, arg: StringResolvable): void;
+	setAll(args: Record<string, StringResolvable>): void;
+	getAll(): Record<string, StringResolvable>;
+	get<Arg extends StringResolvable>(name: string): Arg;
+	resolvePath(path: string): StringResolvable;
+	resolveTemplate(template: string): string;
+	normalize(content: TextContent): NormalizedTextContent;
+}
 export interface Translate {
 	translate: string;
 	args?: Array<TextContent>;
@@ -18,10 +41,15 @@ export type NormalizedTextContent = {
 	type: "array";
 	array: Array<NormalizedTextContent>;
 };
+export interface EventAction {
+	event: string;
+	args?: Array<unknown>;
+}
 export interface FormAction {
 	form?: string;
-	event?: string;
+	event?: string | Array<EventAction>;
 	eventArgs?: Array<unknown>;
+	setArgs?: Record<string, StringResolvable>;
 	copyArgs?: boolean;
 }
 export interface DualButtonForm {
@@ -92,29 +120,6 @@ export interface MultiButtonElementButton {
 	action?: FormAction;
 }
 export type Form = MultiButtonForm | InputForm | DualButtonForm;
-/**
- * @inline
- */
-export interface ToString {
-	toString(): string;
-}
-/**
- * @inline
- */
-export type StringResolvableMap = {
-	[key: string]: StringResolvable;
-};
-export type StringResolvable = ToString | StringResolvableMap;
-export declare class FormArguments {
-	private _args;
-	set(name: string, arg: StringResolvable): void;
-	setAll(args: Record<string, StringResolvable>): void;
-	getAll(): Record<string, StringResolvable>;
-	get<Arg extends StringResolvable>(name: string): Arg;
-	resolvePath(path: string): string;
-	resolveTemplate(template: string): string;
-	normalize(content: TextContent): NormalizedTextContent;
-}
 export declare class FormError extends Error {
 	constructor(msg: string);
 }
@@ -124,9 +129,24 @@ export declare class FormArgumentError extends FormError {
 	readonly current: unknown;
 	constructor(path: string, step: string, current: unknown);
 }
+export interface Entrypoint {
+	form?: string;
+	events?: string | Array<EventAction>;
+	eventArgs?: Array<unknown>;
+}
 export interface FormHub {
-	entrypoint: string;
+	entrypoint: string | Entrypoint;
 	forms: Record<string, Form>;
+}
+export declare class FormEventProducer {
+	protected _hub: FormHub;
+	protected _formAction: FormAction | undefined;
+	protected _args: FormArguments;
+	static fromFormHub(hub: FormHub): FormEventProducer;
+	constructor(hub: FormHub, formAction?: FormAction, previousArgs?: FormArguments);
+	get args(): FormArguments;
+	getInitialForm(): Form | undefined;
+	iterator(): Generator<FormEvent, void, unknown>;
 }
 export declare class FormEvent {
 	protected _form: Form | undefined;
@@ -135,7 +155,7 @@ export declare class FormEvent {
 	protected readonly _hub: FormHub;
 	protected _args: FormArguments;
 	protected _eventArgs: Array<unknown>;
-	constructor(hub: FormHub, action?: FormAction, previousArgs?: FormArguments);
+	constructor(hub: FormHub, eventAction: EventAction | undefined, args: FormArguments);
 	loadForm(name: string): Form;
 	loadForm(name: string, type: "multi-button"): MultiButtonForm;
 	loadForm(name: string, type: "input"): InputForm;
@@ -157,7 +177,7 @@ export type EventReceiverFunction = (event: FormEvent) => Promise<void>;
  */
 export type EventReceiverMap = Record<string, EventReceiverFunction>;
 export type EventReceiver = EventReceiverFunction | EventReceiverMap | undefined;
-export declare const triggerEvent: (event: FormEvent, receiver: EventReceiver) => Promise<Form | undefined>;
+export declare const triggerEvent: (eventProducer: FormEventProducer, receiver: EventReceiver) => Promise<Form | undefined>;
 export declare const _: (value: string, ...args: Array<TextContent>) => Translate;
 export declare const renderLoop: (player: Player, formHub: FormHub, receiver: EventReceiver) => Promise<void>;
 
