@@ -1,6 +1,6 @@
 {
   "name": "@mine-scripters/minecraft-event-driven-form",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Event driven minecraft forms",
   "main": "./dist/MinecraftEventDrivenForm.js",
   "types": "./dist/MinecraftEventDrivenForm.d.ts",
