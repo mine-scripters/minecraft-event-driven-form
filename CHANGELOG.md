@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/mine-scripters/minecraft-event-driven-form/compare/v2.0.0...v2.1.0) (2025-05-13)
+
+
+### Features
+
+* bump base to allow initialArgs ([eb9f362](https://github.com/mine-scripters/minecraft-event-driven-form/commit/eb9f36279b29cea66f0c7bac41433d248df97814))
+
 ## [2.0.0](https://github.com/mine-scripters/minecraft-event-driven-form/compare/v1.1.0...v2.0.0) (2025-05-07)
 
 
