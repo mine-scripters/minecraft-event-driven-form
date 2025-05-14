@@ -133,7 +133,7 @@ export interface Entrypoint {
 	form?: string;
 	events?: string | Array<EventAction>;
 	eventArgs?: Array<unknown>;
-	initialArgs: Record<string, StringResolvable>;
+	initialArgs?: Record<string, StringResolvable>;
 }
 export interface FormHub {
 	entrypoint: string | Entrypoint;
