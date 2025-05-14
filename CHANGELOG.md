@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/mine-scripters/minecraft-event-driven-form/compare/v2.1.0...v2.1.1) (2025-05-14)
+
+
+### Bug Fixes
+
+* Update to latest ([b15c51d](https://github.com/mine-scripters/minecraft-event-driven-form/commit/b15c51da7d83de88cf98a985cc406e88c528761c))
+
 ## [2.1.0](https://github.com/mine-scripters/minecraft-event-driven-form/compare/v2.0.0...v2.1.0) (2025-05-13)
 
 
