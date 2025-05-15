@@ -213,11 +213,12 @@ const renderForm = async (player: Player, formHub: FormHub, form: Form, args: Fo
 };
 
 export const renderLoop = async (player: Player, formHub: FormHub, receiver: EventReceiver) => {
-  let currentForm: Form | undefined = await triggerEvent(FormEventProducer.fromFormHub(formHub), receiver);
-  let args = new FormArguments();
+  const initialProducer = FormEventProducer.fromFormHub(formHub);
+  let currentForm: Form | undefined = await triggerEvent(initialProducer, receiver);
+  let args = initialProducer.args;
   while (currentForm !== undefined) {
-    const event = await renderForm(player, formHub, currentForm, args);
-    currentForm = await triggerEvent(event, receiver);
-    args = event.args;
+    const eventProducer = await renderForm(player, formHub, currentForm, args);
+    currentForm = await triggerEvent(eventProducer, receiver);
+    args = eventProducer.args;
   }
 };
