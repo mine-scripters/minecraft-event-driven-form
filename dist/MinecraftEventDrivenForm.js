@@ -353,12 +353,13 @@ const renderForm = async (player, formHub, form, args) => {
     return new FormEventProducer(formHub);
 };
 const renderLoop = async (player, formHub, receiver) => {
-    let currentForm = await triggerEvent(FormEventProducer.fromFormHub(formHub), receiver);
-    let args = new FormArguments();
+    const initialProducer = FormEventProducer.fromFormHub(formHub);
+    let currentForm = await triggerEvent(initialProducer, receiver);
+    let args = initialProducer.args;
     while (currentForm !== undefined) {
-        const event = await renderForm(player, formHub, currentForm, args);
-        currentForm = await triggerEvent(event, receiver);
-        args = event.args;
+        const eventProducer = await renderForm(player, formHub, currentForm, args);
+        currentForm = await triggerEvent(eventProducer, receiver);
+        args = eventProducer.args;
     }
 };
 
