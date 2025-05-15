@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.2](https://github.com/mine-scripters/minecraft-event-driven-form/compare/v2.1.1...v2.1.2) (2025-05-15)
+
+
+### Bug Fixes
+
+* Use initial args if one was created ([3b2c380](https://github.com/mine-scripters/minecraft-event-driven-form/commit/3b2c38089768a52497f349ca991d4699a23582ac))
+
 ## [2.1.1](https://github.com/mine-scripters/minecraft-event-driven-form/compare/v2.1.0...v2.1.1) (2025-05-14)
 
 
