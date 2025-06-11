@@ -131,8 +131,8 @@ const configureFormInput = (form: InputForm, args: FormArguments): InputScriptDi
     } else if (element.type === 'dropdown') {
       let dropdown = inputDropdown(element.name ?? i.toString(), toRawMessage(args.normalize(element.text)));
       if (element.defaultValue) {
-        dropdown =
-          dropdown.setDefaultValueIndex(element.options.findIndex((o) => o.value === element.defaultValue)) ?? 0;
+        const defaultIndex = element.options.findIndex((o) => o.value === element.defaultValue);
+        dropdown = dropdown.setDefaultValueIndex(defaultIndex === -1 ? 0 : defaultIndex);
       }
 
       for (let j = 0; j < element.options.length; ++j) {
