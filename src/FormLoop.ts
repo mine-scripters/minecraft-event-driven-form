@@ -12,6 +12,7 @@ import {
 } from '@mine-scripters/minecraft-event-driven-form-base';
 import {
   ButtonDialogueResponse,
+  DialogueRejectedResponse,
   dualButtonScriptDialogue,
   DualButtonScriptDialogue,
   inputDropdown,
@@ -207,6 +208,8 @@ const renderForm = async (player: Player, formHub: FormHub, form: Form, args: Fo
     );
 
     return event;
+  } else if (response instanceof DialogueRejectedResponse) {
+    console.error('Dialogue rejected: Exception:', response.exception, 'reason:', response.reason);
   }
 
   return new FormEventProducer(formHub);
