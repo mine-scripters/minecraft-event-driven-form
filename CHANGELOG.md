@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.3](https://github.com/mine-scripters/minecraft-event-driven-form/compare/v2.1.2...v2.1.3) (2025-06-11)
+
+
+### Bug Fixes
+
+* bump @mine-scripters/minecraft-event-driven-form-base ([44a9e8b](https://github.com/mine-scripters/minecraft-event-driven-form/commit/44a9e8b56991cc138eb16933cafddc9ea4ca4c5f))
+* Fix dropdown default value ([7c6e060](https://github.com/mine-scripters/minecraft-event-driven-form/commit/7c6e060681e5668d8974576246349d2325d1d7c4))
+* Logging rejected dialogue - as it is usually a bug ([d1d1d65](https://github.com/mine-scripters/minecraft-event-driven-form/commit/d1d1d65457b25f4406d408fa3523880be2fca4fb))
+
 ## [2.1.2](https://github.com/mine-scripters/minecraft-event-driven-form/compare/v2.1.1...v2.1.2) (2025-05-15)
 
 
