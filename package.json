@@ -23,7 +23,7 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
-    "@mine-scripters/minecraft-event-driven-form-base": "2.1.1"
+    "@mine-scripters/minecraft-event-driven-form-base": "2.1.2"
   },
   "scripts": {
     "build": "rollup -c && dts-bundle-generator --external-inlines '@mine-scripters/minecraft-event-driven-form-base' -o dist/MinecraftEventDrivenForm.d.ts src/index.ts",
