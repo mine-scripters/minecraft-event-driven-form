@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/mine-scripters/minecraft-event-driven-form/compare/v2.1.3...v3.0.0) (2025-07-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Bumping to stable 2.0.0 @minecraft/server-ui
+
+### Features
+
+* Bumping to stable 2.0.0 @minecraft/server-ui ([0670e65](https://github.com/mine-scripters/minecraft-event-driven-form/commit/0670e65182ec59df9e193b5278fb054ad32b333e))
+
 ## [2.1.3](https://github.com/mine-scripters/minecraft-event-driven-form/compare/v2.1.2...v2.1.3) (2025-06-11)
 
 
