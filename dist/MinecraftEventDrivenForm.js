@@ -257,6 +257,18 @@ const configureFormMultiButton = (form, args) => {
         if (element.type === 'button') {
             dialogue = dialogue.addButton(i.toString(), toRawMessage(args.normalize(element.text)), element.icon);
         }
+        else if (element.type === 'divider') {
+            dialogue = dialogue.addDivider();
+        }
+        else if (element.type === 'header') {
+            dialogue = dialogue.addHeader(toRawMessage(args.normalize(element.text)));
+        }
+        else if (element.type === 'label') {
+            dialogue = dialogue.addLabel(toRawMessage(args.normalize(element.text)));
+        }
+        else {
+            assertNever(element);
+        }
     }
     return dialogue;
 };
@@ -283,7 +295,11 @@ const configureFormInput = (form, args) => {
     for (let i = 0; i < form.elements.length; ++i) {
         const element = form.elements[i];
         if (element.type === 'slider') {
-            dialogue = dialogue.addElement(inputSlider(element.name ?? i.toString(), toRawMessage(args.normalize(element.text)), element.min, element.max, element.step, element.defaultValue));
+            let input = inputSlider(element.name ?? i.toString(), toRawMessage(args.normalize(element.text)), element.min, element.max, element.step, element.defaultValue);
+            if (element.tooltip) {
+                input = input.withTooltip(toRawMessage(args.normalize(element.tooltip)));
+            }
+            dialogue = dialogue.addElement(input);
         }
         else if (element.type === 'dropdown') {
             let dropdown = inputDropdown(element.name ?? i.toString(), toRawMessage(args.normalize(element.text)));
@@ -295,13 +311,33 @@ const configureFormInput = (form, args) => {
                 const option = element.options[j];
                 dropdown = dropdown.addOption(toRawMessage(args.normalize(option.text)), option.value);
             }
+            if (element.tooltip) {
+                dropdown = dropdown.withTooltip(toRawMessage(args.normalize(element.tooltip)));
+            }
             dialogue = dialogue.addElement(dropdown);
         }
         else if (element.type === 'text') {
-            dialogue = dialogue.addElement(inputText(element.name ?? i.toString(), toRawMessage(args.normalize(element.text)), toRawMessage(args.normalize(element.placeholder)), element.defaultValue));
+            let input = inputText(element.name ?? i.toString(), toRawMessage(args.normalize(element.text)), toRawMessage(args.normalize(element.placeholder)), element.defaultValue);
+            if (element.tooltip) {
+                input = input.withTooltip(toRawMessage(args.normalize(element.tooltip)));
+            }
+            dialogue = dialogue.addElement(input);
         }
         else if (element.type === 'toggle') {
-            dialogue = dialogue.addElement(inputToggle(element.name ?? i.toString(), toRawMessage(args.normalize(element.text)), element.defaultValue));
+            let input = inputToggle(element.name ?? i.toString(), toRawMessage(args.normalize(element.text)), element.defaultValue);
+            if (element.tooltip) {
+                input = input.withTooltip(toRawMessage(args.normalize(element.tooltip)));
+            }
+            dialogue = dialogue.addElement(input);
+        }
+        else if (element.type === 'label') {
+            dialogue = dialogue.addLabel(toRawMessage(args.normalize(element.text)));
+        }
+        else if (element.type === 'divider') {
+            dialogue = dialogue.addDivider();
+        }
+        else if (element.type === 'header') {
+            dialogue = dialogue.addHeader(toRawMessage(args.normalize(element.text)));
         }
         else {
             assertNever(element);

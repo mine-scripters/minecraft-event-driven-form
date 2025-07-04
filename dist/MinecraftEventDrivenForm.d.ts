@@ -65,6 +65,18 @@ export interface DualButtonElementButton {
 	text: TextContent;
 	action?: FormAction;
 }
+export interface Divider {
+	type: "divider";
+}
+export interface Label {
+	type: "label";
+	text: TextContent;
+}
+export interface Header {
+	type: "header";
+	text: TextContent;
+}
+export type UIElement = Divider | Label | Header;
 export interface InputForm {
 	type: "input";
 	title: TextContent;
@@ -73,7 +85,7 @@ export interface InputForm {
 	action?: FormAction;
 }
 export type InputValue = string | number | boolean;
-export type InputElement = InputElementSlider | InputElementDropdown | InputElementText | InputElementToggle;
+export type InputElement = InputElementSlider | InputElementDropdown | InputElementText | InputElementToggle | UIElement;
 export type InputElementSlider = {
 	type: "slider";
 	name?: string;
@@ -82,6 +94,7 @@ export type InputElementSlider = {
 	max: number;
 	step: number;
 	defaultValue?: number;
+	tooltip?: TextContent;
 };
 export type InputElementDropdown = {
 	type: "dropdown";
@@ -92,6 +105,7 @@ export type InputElementDropdown = {
 		text: TextContent;
 		value: InputValue;
 	}>;
+	tooltip?: TextContent;
 };
 export type InputElementText = {
 	type: "text";
@@ -99,12 +113,14 @@ export type InputElementText = {
 	text: TextContent;
 	placeholder: TextContent;
 	defaultValue?: string;
+	tooltip?: TextContent;
 };
 export type InputElementToggle = {
 	type: "toggle";
 	name?: string;
 	text: TextContent;
 	defaultValue?: boolean;
+	tooltip?: TextContent;
 };
 export interface MultiButtonForm {
 	type: "multi-button";
@@ -112,7 +128,7 @@ export interface MultiButtonForm {
 	body?: TextContent;
 	elements: Array<MultiButtonElement>;
 }
-export type MultiButtonElement = MultiButtonElementButton;
+export type MultiButtonElement = MultiButtonElementButton | UIElement;
 export interface MultiButtonElementButton {
 	type: "button";
 	text: TextContent;
