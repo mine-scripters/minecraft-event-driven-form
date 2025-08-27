@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/mine-scripters/minecraft-event-driven-form/compare/v3.0.0...v3.0.1) (2025-08-27)
+
+
+### Bug Fixes
+
+* update dep to fix bug with dual dialogues ([47ea2dd](https://github.com/mine-scripters/minecraft-event-driven-form/commit/47ea2ddbf1a14ee9a6210c2060570a6f20c796bd))
+
 ## [3.0.0](https://github.com/mine-scripters/minecraft-event-driven-form/compare/v2.1.3...v3.0.0) (2025-07-04)
 
 
