@@ -6,7 +6,7 @@
   "types": "./dist/MinecraftEventDrivenForm.d.ts",
   "private": false,
   "devDependencies": {
-    "@mine-scripters/minecraft-script-dialogue": "^2.0.0",
+    "@mine-scripters/minecraft-script-dialogue": "^2.0.1",
     "@minecraft/server": "^2.0.0",
     "@minecraft/server-ui": "^2.0.0",
     "@rollup/plugin-node-resolve": "^16.0.1",
